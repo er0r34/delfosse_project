@@ -1,10 +1,17 @@
 {
-  "name": "${PROJECT_NAME}",
+  "name": "delfosse_project",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "js/app.js",
   "scripts": {
+    "styles": "sass --watch scss/app.scss css/app.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "private": true
+  "private": true,
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "sass": "^1.85.0"
+  }
 }

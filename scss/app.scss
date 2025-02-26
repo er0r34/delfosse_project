@@ -3,6 +3,8 @@ $background-color: #333;
 $text-color: #fff;
 $body-bg-color: #f4f4f4;
 
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
 // Global body styles
 body {
   margin: 0;
@@ -12,14 +14,278 @@ body {
 
 // Header styles
 header {
-  text-align: center;
   background-color: $background-color;
   color: $text-color;
   padding: 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   h1 {
     margin: 0;
     font-size: 2.5rem;
+    flex-grow: 1; // Allow title to grow in space
+    text-align: center; // Ensure title is centered regardless of dropdown
+  }
+}
+
+/* Photo Titles */
+main h3 {
+  color: $background-color; // Use the same color as the header text
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+/* Add hover effect for images */
+main img {
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+main img:hover {
+  transform: scale(1.05); // Slight zoom on hover
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); // Enhance shadow on hover
+}
+
+/* Ensure images are square with cropping */
+.square-image {
+  position: relative;
+  width: 100%;
+  max-width: 200px;
+  max-height: 200px;
+  padding-bottom: 100%; // Maintain 1:1 aspect ratio
+  overflow: hidden;
+  border-radius: 10px; // Optional rounded corners
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); // Optional shadow
+}
+
+/* Constrain home page photos */
+main img.home-photo {
+  display: block;
+  max-width: 300px; // Max width of photo
+  max-height: 300px; // Max height of photo
+  width: auto; // Maintain aspect ratio
+  height: auto; // Maintain aspect ratio
+  margin: 0 auto; // Center the image within the container
+}
+
+/* Ensure row content spacing is centered */
+main .row {
+  justify-content: center; // Center the content horizontally
+}
+
+/* 2x2 Grid Layout for Larger Screens */
+main .col-12.col-md-6 {
+  flex: 0 0 calc(50% - 25px); // Each image takes 50% width with spacing
+  max-width: calc(50% - 25px); // Prevent overflow in two-column layout
+  margin: 0 12.5px 50px 12.5px; // 25px total horizontal gap, 50px vertical gap
+  text-align: center; // Center text
+}
+
+/* Ensure responsiveness for smaller screens */
+@media (max-width: 768px) {
+  main .col-12.col-md-6 {
+    flex: 0 0 100%; // Stacks images vertically on small screens
+    max-width: 100%; // Take full row width
+    margin: 0 0 50px 0; // Remove horizontal spacing, keep vertical spacing
+  }
+}
+
+/* Button styling */
+.container a.btn-primary {
+  background-color: #007bff; // Standard blue
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.25rem;
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.2s;
+
+  &:hover {
+    background-color: darken(#007bff, 10%);
+    transform: scale(1.05); // A gentle zoom-in effect on hover
+  }
+}
+
+// Modal Styles (Updated Layout for Add Item Modal)
+.modal-fullscreen {
+  .modal-header {
+    background-color: $background-color;
+    color: $text-color;
+    padding: 1.5rem;
+
+    h1 {
+      font-size: 2rem;
+    }
+  }
+
+  /* Ensure sections are stacked vertically */
+  .modal-body {
+    display: flex; // Maintain flex for alignment and layout
+    flex-direction: column;
+    align-items: flex-start; // Align items to content's natural width
+    gap: 1.5rem; // Add spacing between sections
+    padding: 2rem; // Padding inside the modal
+
+    // Allow sections to size themselves to content
+    > div {
+      width: auto; // Automatic width
+      max-width: 100%; // Prevent overflow
+      margin: 0; // No additional margins
+    }
+  }
+
+  /* Inputs, textareas, and buttons */
+  input,
+  textarea,
+  button {
+    width: auto; // Adapt width to content
+    max-width: 100%; // Prevent going beyond the container
+    border-radius: 4px;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+  }
+
+  /* Title Section */
+  #titleSection {
+    h5 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    input {
+      width: auto; // Size to the content
+      border-radius: 4px;
+    }
+  }
+
+  /* Photo Upload Section */
+  #addPhotoSection {
+    label {
+      display: inline-block; // Inline-block for better layout
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    input[type="file"] {
+      width: auto; // Adjust to fit content
+      padding: 0.5rem;
+      border-radius: 4px;
+    }
+  }
+
+  #addItemContainer {
+    button {
+      width: auto; // Button width is dependent on content
+      background-color: #007bff;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      font-size: 1.25rem;
+      border-radius: 4px;
+
+      &:hover {
+        background-color: darken(#007bff, 10%);
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  #categoriesContainer {
+    h5 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-check {
+      display: inline-flex; // Keep checkboxes inline
+      align-items: center; // Align boxes with labels
+      margin-bottom: 0.5rem;
+
+      input {
+        margin-right: 0.5rem;
+      }
+
+      label {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  #descriptionContainer {
+    h5 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    textarea {
+      width: auto; // Dynamic adjustment
+      resize: vertical;
+      height: 100px;
+    }
+  }
+
+  #tagsContainer {
+    h5 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    input {
+      width: auto; // Input adapts to content
+      border-radius: 4px;
+    }
+  }
+
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end; // Align buttons to the right
+    gap: 1rem; // Space between buttons
+
+    .btn-secondary {
+      background-color: #ddd;
+      color: $background-color;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      color: white;
+
+      &:hover {
+        background-color: darken(#007bff, 10%);
+      }
+    }
+  }
+}
+
+/* Changes added for centering modal and fixing max-width */
+.modal-fullscreen {
+  display: flex; // Flexbox for centering
+  justify-content: center; // Center horizontally
+  align-items: center; // Center vertically
+  padding: 1rem;
+
+  .modal-dialog {
+    max-width: 500px; // Fixed max width
+    width: 100%; // Responsive width
+    margin: 0; // Remove default margin
+  }
+
+  .modal-content {
+    text-align: center; // Center all modal text
+    padding: 2rem;
+  }
+
+  .modal-footer {
+    justify-content: center; // Center action buttons
+  }
+}
+/* Responsive Adjustments for Modal */
+@media (max-width: 768px) {
+  .modal-fullscreen .modal-body {
+    padding: 1rem; // Adjust padding for smaller devices
   }
 }
